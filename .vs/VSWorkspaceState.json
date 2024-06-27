@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\myproject",
+    "\\myproject\\myproject",
+    "\\myproject\\posts",
+    "\\myproject\\posts\\templates",
+    "\\myproject\\posts\\templates\\posts",
+    "\\myproject\\static",
+    "\\myproject\\static\\css",
+    "\\myproject\\templates"
+  ],
+  "SelectedNode": "\\myproject\\posts\\admin.py",
+  "PreviewInSolutionExplorer": false
+}
