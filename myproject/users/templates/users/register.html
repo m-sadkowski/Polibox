@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Zarejestruj się</h1>
-    <form class="form-with-validation" action="/users/register/" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="form-submit">Zarejestruj się</button>
-    </form>
+    <div class="user-pass-form">
+         
+        <form class="form-with-validation" action="/users/register/" method="post">
+            <h1 style="text-align: center;">Zarejestruj się</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="form-submit">Zarejestruj się</button>
+        </form>
+    </div>
 {% endblock %}
 

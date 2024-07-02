@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    password2 = forms.CharField(
+        label="Potwierdź hasło",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
+        help_text='',  # Ukrycie domyślnego tekstu pomocniczego
+    )
 
     class Meta:
         model = User

@@ -1,11 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\myproject",
-    "\\myproject\\myproject",
-    "\\myproject\\posts",
-    "\\myproject\\static",
-    "\\myproject\\templates"
+    "\\myproject"
   ],
+  "SelectedNode": "\\LICENSE",
   "PreviewInSolutionExplorer": false
 }
