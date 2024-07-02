@@ -7,7 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>
         {% block title %}
-            Django App
+            Polibox
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -16,19 +16,42 @@
 <body>
     <nav>
         <a href="/">
-            <span role="img" aria-label="Home">🏠</span>
-        </a> |
+            <span class="navlink" role="img" aria-label="Home" title="STRONA GŁÓWNA"><img id="logo" src="/media/polibox.png"/></span>
+        </a>
         <a href="/about">
-            <span role="img" aria-label="About">ℹ</span>
+            <span class="navlink" role="img" aria-label="About" title="INFORMACJE">INFORMACJE</span>
         </a> |
         <a href="{% url 'posts:list' %}">
-            <span role="img" aria-label="Posts">📝</span>
+            <span class="navlink" role="img" aria-label="Posts" title="POSTY">POSTY</span>
         </a>
+        {% if user.is_authenticated %}
+            |
+            <a href="{% url 'posts:new-post' %}">
+                <span class="navlink" role="img" aria-label="New Post" title="NOWY POST">NOWY POST</span>
+            </a>
+            <form class="logout" action="{% url 'users:logout' %}" method="post">
+                {% csrf_token %}
+                <button class="logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
+            </form>
+        {% else %}
+        <div class="auth-links">
+            <a href="{% url 'users:register' %}">
+                <span class="navlink" role="img" aria-label="User Registration" title="REJESTRACJA">REJESTRACJA</span>
+            </a> |
+            <a href="{% url 'users:login' %}">
+                <span class="navlink" role="img" aria-label="User Login" title="LOGOWANIE">LOGOWANIE</span>
+            </a>
+        </div>
+        {% endif %}
     </nav>
     <main>
         {% block content %}
 
         {% endblock %}
     </main>
+
+    <footer>
+        <p>&copy; 2024 Polibox</p>
+    </footer>
 </body>
 </html>
