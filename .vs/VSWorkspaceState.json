@@ -1,8 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\myproject"
+    "\\myproject",
+    "\\myproject\\static",
+    "\\myproject\\static\\css",
+    "\\myproject\\users",
+    "\\myproject\\users\\templates",
+    "\\myproject\\users\\templates\\users"
   ],
-  "SelectedNode": "\\LICENSE",
+  "SelectedNode": "\\favicon.ico",
   "PreviewInSolutionExplorer": false
 }
