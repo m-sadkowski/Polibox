@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    GENERATOR
+{% endblock %}
+
+{% block content %}
+    <h1>Generator powitań</h1>
+
+    <label for="person-select">Wybierz osobę:</label>
+    <select id="person-select" class="js-example-basic-single" style="width: 300px;">
+        {% for person in people %}
+        <option value="{{ person.id }}">{{ person.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label for="greeting-text">Tekst powitania:</label><br>
+    <textarea id="greeting-text" rows="4" cols="50" readonly></textarea>
+
+    <br><br>
+
+    <button onclick="generateGreeting()">Generuj</button>
+{% endblock %}
+

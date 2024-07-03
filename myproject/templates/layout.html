@@ -10,8 +10,12 @@
             Polibox
         {% endblock %}
     </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/main.js' %}" defer></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </head>
 <body>
     <nav>
@@ -25,36 +29,45 @@
             <a href="/about">
                 <span class="navlink" role="img" aria-label="About" title="INFORMACJE">INFORMACJE</span>
             </a>
-            <!--
-            <a href="{% url 'posts:list' %}">
-                <span class="navlink" role="img" aria-label="Posts" title="POSTY">POSTY</span>
-            </a>
-            -->
             {% if user.is_authenticated %}
                 <a href="{% url 'posts:new-post' %}">
                     <span class="navlink" role="img" aria-label="New Post" title="NOWY POST">NOWY POST</span>
                 </a>
-                <form class="logout" action="{% url 'users:logout' %}" method="post">
-                    {% csrf_token %}
-                    <button class="logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
-                </form>
-            {% else %}
-            <div class="auth-links">
-                <a href="{% url 'users:register' %}">
-                    <span class="navlink" role="img" aria-label="User Registration" title="REJESTRACJA">REJESTRACJA</span>
+                <a href="{% url 'generator:generator' %}">
+                    <span class="navlink" role="img" aria-label="Generator" title="GENERATOR">GENERATOR</span>
                 </a>
-                <a href="{% url 'users:login' %}">
-                    <span class="navlink" role="img" aria-label="User Login" title="LOGOWANIE">LOGOWANIE</span>
-                </a>
-            </div>
             {% endif %}
+            <div class="auth-links">
+                {% if user.is_authenticated %}
+                    <form class="logout" action="{% url 'users:logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'users:register' %}">
+                        <span class="navlink" role="img" aria-label="User Registration" title="REJESTRACJA">REJESTRACJA</span>
+                    </a>
+                    <a href="{% url 'users:login' %}">
+                        <span class="navlink" role="img" aria-label="User Login" title="LOGOWANIE">LOGOWANIE</span>
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </nav>
     <main>
+
         {% block content %}
+
         {% endblock %}
     </main>
     <footer>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <p>&copy; 2024 Polibox</p>
     </footer>
 </body>

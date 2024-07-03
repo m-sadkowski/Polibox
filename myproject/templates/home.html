@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Strona główna
+    POLIBOX
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
                 <ul>
                     <li>Znajdziesz tutaj wszelką pomoc przydatną w trakcie studiów na PG!</li>
                     <li>W zakładce <a>MATERIAŁY</a> odnajdziesz wszystkie pomoce naukowe.</li>
-                    <li>W zakładce <a>GENERATOR</a> możesz sprawdzić jak rozpocząć maila do danego prowadzącego i skopiować szablon.</li>
+                    <li>W zakładce <a href="{% url 'generator:generator' %}">GENERATOR</a> możesz sprawdzić jak rozpocząć maila do danego prowadzącego i skopiować szablon.</li>
                     <li>W zakładce <a>KALENDARZ</a> znajdziesz terminy ważnych wydarzeń takich jak kolokwia, egzaminy, uroczystości.</li>
                     <li>W zakładce <a href="/about">INFORMACJE</a> dostępne są informacje kontaktowe do autorów oraz regulamin portalu.</li>
                 </ul>

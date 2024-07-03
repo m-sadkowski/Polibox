@@ -19,6 +19,8 @@ class CustomUserCreationForm(UserCreationForm):
         email = self.cleaned_data.get("email")
         if not email.endswith("@student.pg.edu.pl"):
             raise forms.ValidationError("Email musi być z domeny @student.pg.edu.pl")
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Istnieje zarejestrowany użytkownik z takim adresem email.")
         return email
 
     def save(self, commit=True):
