@@ -15,41 +15,45 @@
 </head>
 <body>
     <nav>
-        <a href="/">
-            <span class="navlink" role="img" aria-label="Home" title="STRONA GŁÓWNA"><img id="logo" src="/media/polibox.png"/></span>
-        </a>
-        <a href="/about">
-            <span class="navlink" role="img" aria-label="About" title="INFORMACJE">INFORMACJE</span>
-        </a> |
-        <a href="{% url 'posts:list' %}">
-            <span class="navlink" role="img" aria-label="Posts" title="POSTY">POSTY</span>
-        </a>
-        {% if user.is_authenticated %}
-            |
-            <a href="{% url 'posts:new-post' %}">
-                <span class="navlink" role="img" aria-label="New Post" title="NOWY POST">NOWY POST</span>
+        <div class="navbar-brand">
+            <a href="/">
+                <span class="navlink" role="img" aria-label="Home" title="STRONA GŁÓWNA"><img id="logo" src="/media/polibox.png"/></span>
             </a>
-            <form class="logout" action="{% url 'users:logout' %}" method="post">
-                {% csrf_token %}
-                <button class="logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
-            </form>
-        {% else %}
-        <div class="auth-links">
-            <a href="{% url 'users:register' %}">
-                <span class="navlink" role="img" aria-label="User Registration" title="REJESTRACJA">REJESTRACJA</span>
-            </a> |
-            <a href="{% url 'users:login' %}">
-                <span class="navlink" role="img" aria-label="User Login" title="LOGOWANIE">LOGOWANIE</span>
-            </a>
+            <span class="navbar-toggle" aria-label="Toggle navigation">&#9776;</span>
         </div>
-        {% endif %}
+        <div class="navbar-links">
+            <a href="/about">
+                <span class="navlink" role="img" aria-label="About" title="INFORMACJE">INFORMACJE</span>
+            </a>
+            <!--
+            <a href="{% url 'posts:list' %}">
+                <span class="navlink" role="img" aria-label="Posts" title="POSTY">POSTY</span>
+            </a>
+            -->
+            {% if user.is_authenticated %}
+                <a href="{% url 'posts:new-post' %}">
+                    <span class="navlink" role="img" aria-label="New Post" title="NOWY POST">NOWY POST</span>
+                </a>
+                <form class="logout" action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
+                </form>
+            {% else %}
+            <div class="auth-links">
+                <a href="{% url 'users:register' %}">
+                    <span class="navlink" role="img" aria-label="User Registration" title="REJESTRACJA">REJESTRACJA</span>
+                </a>
+                <a href="{% url 'users:login' %}">
+                    <span class="navlink" role="img" aria-label="User Login" title="LOGOWANIE">LOGOWANIE</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
     </nav>
     <main>
         {% block content %}
-
         {% endblock %}
     </main>
-
     <footer>
         <p>&copy; 2024 Polibox</p>
     </footer>

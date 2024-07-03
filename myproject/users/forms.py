@@ -8,7 +8,7 @@ class CustomUserCreationForm(UserCreationForm):
         label="Potwierdź hasło",
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
-        help_text='',  # Ukrycie domyślnego tekstu pomocniczego
+        help_text='',
     )
 
     class Meta:
@@ -30,7 +30,7 @@ class CustomUserCreationForm(UserCreationForm):
         return user
 
 class CustomAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField(label="Nazwa użytkownika - s<nr_albumu> (np. s123456)")
+    username = forms.EmailField(label="Email")
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
