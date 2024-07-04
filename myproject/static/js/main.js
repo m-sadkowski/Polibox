@@ -23,9 +23,19 @@ $(document).ready(function() {
 function generateGreeting() {
     var personId = $('#person-select').val();
     fetch(`/generator/generate/${personId}/`)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            $('#greeting-text').val(data);
+            $('#greeting-text').val(data.greeting_text);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function generateMail() {
+    var personId = $('#person-select').val();
+    fetch(`/generator/generate/${personId}/`)
+        .then(response => response.json())
+        .then(data => {
+            $('#mail-text').val(data.mail_text);
         })
         .catch(error => console.error('Error:', error));
 }
@@ -51,3 +61,4 @@ search.addEventListener("keyup", () => {
         });
     }
 });
+

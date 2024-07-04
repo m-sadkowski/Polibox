@@ -12,18 +12,22 @@
                 <label for="person-select">Wybierz osobę:</label>
                 <select id="person-select" class="js-example-basic-single" style="width: 300px;">
                     {% for person in people %}
-                    <option value="{{ person.id }}">{{ person.name }}</option>
+                        <option value="{{ person.id }}">{{ person.name }}</option>
                     {% endfor %}
                 </select>
 
-                <br><br>
+                <br>
 
                 <label for="greeting-text">Tekst powitania:</label><br>
                 <textarea id="greeting-text" rows="4" cols="50" readonly></textarea>
 
-                <br><br>
+                <br>
 
-                <button class="submit-button" onclick="generateGreeting()">Generuj</button>
+                <label for="mail-text">Email:</label><br>
+                <textarea id="mail-text" rows="4" cols="50" readonly></textarea>
+                <br>
+
+                <button class="submit-button" onclick="generateGreeting(); generateMail()">Generuj</button>
             </div>
         </div>
     </div>
