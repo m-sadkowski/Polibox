@@ -5,22 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Generator powitań</h1>
+    <div class="generator-box">
+        <div class="generator-container">
+            <div class="generator-content">
+                <h1 style="text-align: center;">GENERATOR EMAIL</h1>
+                <label for="person-select">Wybierz osobę:</label>
+                <select id="person-select" class="js-example-basic-single" style="width: 300px;">
+                    {% for person in people %}
+                    <option value="{{ person.id }}">{{ person.name }}</option>
+                    {% endfor %}
+                </select>
 
-    <label for="person-select">Wybierz osobę:</label>
-    <select id="person-select" class="js-example-basic-single" style="width: 300px;">
-        {% for person in people %}
-        <option value="{{ person.id }}">{{ person.name }}</option>
-        {% endfor %}
-    </select>
+                <br><br>
 
-    <br><br>
+                <label for="greeting-text">Tekst powitania:</label><br>
+                <textarea id="greeting-text" rows="4" cols="50" readonly></textarea>
 
-    <label for="greeting-text">Tekst powitania:</label><br>
-    <textarea id="greeting-text" rows="4" cols="50" readonly></textarea>
+                <br><br>
 
-    <br><br>
-
-    <button onclick="generateGreeting()">Generuj</button>
+                <button class="submit-button" onclick="generateGreeting()">Generuj</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-

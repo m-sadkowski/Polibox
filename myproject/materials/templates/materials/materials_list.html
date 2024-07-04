@@ -6,15 +6,15 @@
 
 {% block content %}
     <section>
-        <h1>Posty</h1>
-        {% for post in posts %}
+        <h1>MATERIAŁY</h1>
+        {% for material in materials %}
             <article class="post">
                 <h2>
-                    <a href="{% url 'posts:page' slug=post.slug %}">
-                    {{ post.title }}
+                    <a href="{% url 'materials:page' slug=material.slug %}">
+                        {{ material.title }}
                     </a>
                 </h2>
-                <p>{{ post.date }}</p>
+                <p>{{ material.date }}</p>
             </article>
         {% endfor %}
     </section>

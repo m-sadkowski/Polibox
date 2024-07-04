@@ -12,6 +12,12 @@
     </title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/information-box.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alerts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/generator.css' %}">
     <script src="{% static 'js/main.js' %}" defer></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -30,8 +36,13 @@
                 <span class="navlink" role="img" aria-label="About" title="INFORMACJE">INFORMACJE</span>
             </a>
             {% if user.is_authenticated %}
-                <a href="{% url 'posts:new-post' %}">
-                    <span class="navlink" role="img" aria-label="New Post" title="NOWY POST">NOWY POST</span>
+                {% if user.is_staff %}
+                    <a href="{% url 'materials:new-material' %}">
+                        <span class="navlink" role="img" aria-label="Dodaj Materiały" title="DODAJ MATERIAŁY">DODAJ MATERIAŁY</span>
+                    </a>
+                {% endif %}
+                <a href="{% url 'materials:list' %}">
+                    <span class="navlink" role="img" aria-label="Materials" title="MATERIAŁY">MATERIAŁY</span>
                 </a>
                 <a href="{% url 'generator:generator' %}">
                     <span class="navlink" role="img" aria-label="Generator" title="GENERATOR">GENERATOR</span>
@@ -41,7 +52,7 @@
                 {% if user.is_authenticated %}
                     <form class="logout" action="{% url 'users:logout' %}" method="post">
                         {% csrf_token %}
-                        <button class="logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
+                        <button class="nav-logout-button" aria-label="User Logout" title="WYLOGUJ SIĘ">{{ user.username }} WYLOGUJ SIĘ</button>
                     </form>
                 {% else %}
                     <a href="{% url 'users:register' %}">
@@ -55,7 +66,6 @@
         </div>
     </nav>
     <main>
-
         {% block content %}
 
         {% endblock %}

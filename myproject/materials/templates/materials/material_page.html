@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>{{ material.title }}</h1>
+        <p>{{ material.lectures }}</p>
+        <p>{{ material.classes }}</p>
+        <p>{{ material.labs }}</p>
+        <p>{{ material.projects }}</p>
+        <p>{{ material.date }}</p>
+    </section>
+{% endblock %}
+
