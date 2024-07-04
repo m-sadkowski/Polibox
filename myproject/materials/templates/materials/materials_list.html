@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'gallery-layout.html' %}
 
 {% block title %}
     Posts
@@ -7,16 +7,20 @@
 {% block content %}
     <section>
         <h1>MATERIAŁY</h1>
-        {% for material in materials %}
-            <article class="post">
-                <h2>
-                    <a href="{% url 'materials:page' slug=material.slug %}">
-                        {{ material.title }}
-                    </a>
-                </h2>
-                <p>{{ material.date }}</p>
-            </article>
-        {% endfor %}
+        <div class="container">
+            <div class="search-box">
+                <input type="text" placeholder="WPISZ NAZWĘ PRZEDMIOTU">
+            </div>
+            <div class="subjects">
+                {% for material in materials %}
+                   <a href="{% url 'materials:page' slug=material.slug %}">
+                       <button class="subject-box" data-name="{{ material.title }}">
+                           {{ material.title }}
+                       </button>
+                   </a>
+                {% endfor %}
+            </div>
+        </div>
     </section>
 {% endblock %}
 

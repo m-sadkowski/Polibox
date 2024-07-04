@@ -6,11 +6,15 @@
 
 {% block content %}
     <section>
-        <h1>New Material</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-        </form>
+        <div class="materials-form-box">
+            <div class="materials-form-container">
+                <form class="materials-form" method="post">
+                    <h1 style="text-align: center;">DODAJ MATERIAŁY</h1>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="submit-button" type="submit">ZAPISZ</button>
+                </form>
+            </div>
+        </div>
     </section>
 {% endblock %}

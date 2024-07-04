@@ -29,3 +29,25 @@ function generateGreeting() {
         })
         .catch(error => console.error('Error:', error));
 }
+
+const search = document.querySelector(".search-box input"),
+      subjects = document.querySelectorAll(".subject-box");
+
+search.addEventListener("keyup", () => {
+    let searchValue = search.value.trim().toLowerCase(); // Trim spaces and convert to lowercase
+
+    subjects.forEach(subject => {
+        if (subject.dataset.name.toLowerCase().includes(searchValue)) {
+            subject.style.display = "block";
+        } else {
+            subject.style.display = "none";
+        }
+    });
+
+    // If the search box is empty, display all subjects
+    if (searchValue === "") {
+        subjects.forEach(subject => {
+            subject.style.display = "block";
+        });
+    }
+});
