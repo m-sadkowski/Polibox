@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'materials',
     'users',
     'generator',
+    'mycalendar',
 ]
 
 MIDDLEWARE = [

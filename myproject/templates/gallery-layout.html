@@ -43,6 +43,9 @@
                 <a href="{% url 'generator:generator' %}">
                     <span class="navlink" role="img" aria-label="Generator" title="GENERATOR">GENERATOR</span>
                 </a>
+                <a href="{% url 'mycalendar:calendar' %}">
+                    <span class="navlink" role="img" aria-label="Kalendarz" title="KALENDARZ">KALENDARZ</span>
+                </a>
             {% endif %}
             <div class="auth-links">
                 {% if user.is_authenticated %}

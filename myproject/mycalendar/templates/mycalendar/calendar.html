@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h1>Kalendarz - {{ current_month_name }}</h1>
+  <table>
+    <tr>
+      <th>Poniedziałek</th>
+      <th>Wtorek</th>
+      <th>Środa</th>
+      <th>Czwartek</th>
+      <th>Piątek</th>
+      <th>Sobota</th>
+      <th>Niedziela</th>
+    </tr>
+    {% for week in calendar %}
+    <tr>
+      {% for day in week %}
+      <td>
+        {{ day.day|date:"d.m" }}
+        {% for event in day.events %}
+        <div>{{ event.title }}</div>
+        {% endfor %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{% url 'mycalendar:event_add' %}">Dodaj Wydarzenie</a>
+
+  <div class="navigation">
+    <a href="{% url 'mycalendar:calendar' %}?year={{ prev_month_year }}&month={{ prev_month }}">Poprzedni Miesiąc</a>
+    <a href="{% url 'mycalendar:calendar' %}?year={{ next_month_year }}&month={{ next_month }}">Następny Miesiąc</a>
+  </div>
+{% endblock %}

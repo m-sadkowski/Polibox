@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{% static 'css/information-box.css' %}">
     <link rel="stylesheet" href="{% static 'css/alerts.css' %}">
     <link rel="stylesheet" href="{% static 'css/generator.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
     <script src="{% static 'js/main.js' %}" defer></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -46,6 +47,9 @@
                 </a>
                 <a href="{% url 'generator:generator' %}">
                     <span class="navlink" role="img" aria-label="Generator" title="GENERATOR">GENERATOR</span>
+                </a>
+                <a href="{% url 'mycalendar:calendar' %}">
+                    <span class="navlink" role="img" aria-label="Kalendarz" title="KALENDARZ">KALENDARZ</span>
                 </a>
             {% endif %}
             <div class="auth-links">
