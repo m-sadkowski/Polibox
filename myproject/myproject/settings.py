@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'generator',
     'mycalendar',
+    'progression',
 ]
 
 MIDDLEWARE = [

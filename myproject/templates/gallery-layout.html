@@ -14,17 +14,20 @@
     <!-- jQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+    <!-- CSS -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'css/gallery-style.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
     <link rel="stylesheet" href="{% static 'css/information-box.css' %}">
+    <!-- JavaScript -->
     <script src="{% static 'js/main.js' %}" defer></script>
+    <!-- icon -->
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
 </head>
 <body>
     <nav>
+        <!-- Navbar with all subsites, register/login/logout buttons -->
         <div class="navbar-brand">
             <a href="/">
                 <span class="navlink" role="img" aria-label="Home" title="STRONA GŁÓWNA"><img id="logo" src="/media/polibox.png"/></span>
@@ -50,6 +53,9 @@
                 <a href="{% url 'mycalendar:calendar' %}">
                     <span class="navlink" role="img" aria-label="Kalendarz" title="KALENDARZ">KALENDARZ</span>
                 </a>
+                <a href="{% url 'progression:progress' %}">
+                    <span class="navlink" role="img" aria-label="Progres" title="PROGRES">PROGRES</span>
+                </a>
             {% endif %}
             <div class="auth-links">
                 {% if user.is_authenticated %}
@@ -69,11 +75,13 @@
         </div>
     </nav>
     <main>
+        <!-- Main content -->
         {% block content %}
 
         {% endblock %}
     </main>
     <footer>
+        <!-- Footer with alerts -->
         {% if messages %}
             <div class="messages">
                 {% for message in messages %}

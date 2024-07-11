@@ -1,15 +1,18 @@
+# mycalendar/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Event
-from .forms import EventForm  # Musisz utworzyć formularz EventForm
+from .forms import EventForm
 from datetime import date, timedelta
 import calendar
 from .utils import get_month_calendar
 
+
 def is_admin(user):
     return user.is_superuser
+
 
 @login_required(login_url='/users/login/')
 def calendar_view(request):
@@ -17,9 +20,8 @@ def calendar_view(request):
     month = int(request.GET.get('month', date.today().month))
 
     # Get the current calendar
-    context = {}
-    context['calendar'] = get_month_calendar(year, month)
-    context['events'] = Event.objects.filter(date__year=year, date__month=month)
+    context = {'calendar': get_month_calendar(year, month),
+               'events': Event.objects.filter(date__year=year, date__month=month)}
 
     # Calculate previous and next month
     first_day_of_month = date(year, month, 1)
@@ -36,6 +38,7 @@ def calendar_view(request):
 
     return render(request, 'mycalendar/calendar.html', context)
 
+
 @user_passes_test(is_admin, login_url='/users/login/')
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
@@ -46,16 +49,18 @@ def event_create_view(request):
             form.save()
             return redirect('mycalendar:calendar')
     else:
-        date = request.GET.get('date')
-        form = EventForm(initial={'date': date})
+        event_date = request.GET.get('date')
+        form = EventForm(initial={'date': event_date})
 
     return render(request, 'mycalendar/event_form.html', {'form': form})
+
 
 @user_passes_test(is_admin, login_url='/users/login/')
 def event_delete_view(request, pk):
     event = get_object_or_404(Event, pk=pk)
     event.delete()
     return redirect('mycalendar:calendar')
+
 
 @user_passes_test(is_admin, login_url='/users/login/')
 @csrf_exempt

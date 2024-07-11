@@ -35,15 +35,15 @@ $(document).ready(function() {
         // Prevent the event from bubbling up to the parent elements
         event.stopPropagation();
 
-        var title = $(this).data('title');
-        var description = $(this).data('description');
-        var eventId = $(this).data('id');
-        $('#dialog-title').text(title);
-        $('#dialog-description').text(description);
+        var title = $(this).data('title'); // Get the event title
+        var description = $(this).data('description'); // Get the event description
+        var eventId = $(this).data('id'); // Get the event ID
+        $('#dialog-title').text(title); // Set the title text
+        $('#dialog-description').text(description); // Set the description text
 
         $('#event-dialog').dialog({
             modal: true,
-            width: 400,
+            width: 500,
             buttons: {
                 Ok: function() {
                     $(this).dialog("close");
@@ -86,32 +86,32 @@ $(document).ready(function() {
 });
 
 function generateGreeting() {
-    var personId = $('#person-select').val();
-    fetch(`/generator/generate/${personId}/`)
-        .then(response => response.json())
+    var personId = $('#person-select').val(); // Get the selected person ID
+    fetch(`/generator/generate/${personId}/`) // Fetch the greeting text
+        .then(response => response.json()) // Convert the response to JSON
         .then(data => {
-            $('#greeting-text').val(data.greeting_text);
+            $('#greeting-text').val(data.greeting_text); // Set the greeting text in the textarea
         })
         .catch(error => console.error('Error:', error));
 }
 
 function generateMail() {
-    var personId = $('#person-select').val();
-    fetch(`/generator/generate/${personId}/`)
-        .then(response => response.json())
+    var personId = $('#person-select').val(); // Get the selected person ID
+    fetch(`/generator/generate/${personId}/`) // Fetch the mail text
+        .then(response => response.json()) // Convert the response to JSON
         .then(data => {
-            $('#mail-text').val(data.mail_text);
+            $('#mail-text').val(data.mail_text); // Set the mail text in the textarea
         })
         .catch(error => console.error('Error:', error));
 }
 
-const search = document.querySelector(".search-box input"),
-      subjects = document.querySelectorAll(".subject-box");
+const search = document.querySelector(".search-box input"), // Get the search input
+      subjects = document.querySelectorAll(".subject-box"); // Get all the subjects
 
-search.addEventListener("keyup", () => {
+search.addEventListener("keyup", () => { // Listen for keyup event
     let searchValue = search.value.trim().toLowerCase(); // Trim spaces and convert to lowercase
 
-    subjects.forEach(subject => {
+    subjects.forEach(subject => { // Loop through each subject
         if (subject.dataset.name.toLowerCase().includes(searchValue)) {
             subject.style.display = "block";
         } else {
@@ -119,7 +119,7 @@ search.addEventListener("keyup", () => {
         }
     });
 
-    if (searchValue === "") {
+    if (searchValue === "") { // If the search input is empty, display all subjects
         subjects.forEach(subject => {
             subject.style.display = "block";
         });

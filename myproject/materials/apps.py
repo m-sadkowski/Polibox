@@ -1,3 +1,4 @@
+# materials/admin.py
 from django.apps import AppConfig
 
 

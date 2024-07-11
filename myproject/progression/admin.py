@@ -1,3 +1,2 @@
-from django.contrib import admin
+# progression/admin.py
 
-# Register your models here.

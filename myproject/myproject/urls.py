@@ -28,6 +28,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('generator/', include('generator.urls')),
     path('mycalendar/', include('mycalendar.urls')),
+    path('progression/', include('progression.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
