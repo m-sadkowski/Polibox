@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Lista przedmiotów - Polibox
+{% endblock %}
+
+{% block content %}
+<h1>Lista przedmiotów dla kierunku</h1>
+{% for semester, subjects in subjects_by_semester.items %}
+    <h2>Semestr {{ semester }}</h2>
+    <ul>
+        {% for subject in subjects %}
+            <li><a href="{% url 'progression:subject_detail' subject.id %}">{{ subject.name }}</a></li>
+        {% empty %}
+            <li>Brak przedmiotów w tym semestrze</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+<a href="{% url 'progression:direction_list' %}">Wróć do listy kierunków</a>
+{% endblock %}

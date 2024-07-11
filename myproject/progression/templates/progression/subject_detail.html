@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ subject.name }} - Polibox
+{% endblock %}
+
+{% block content %}
+<h1>{{ subject.name }}</h1>
+<h2>Semestr: {{ subject.semester }}</h2>
+<ul>
+    {% for element in elements %}
+        <li>
+            {{ element.name }}
+            {% if element.id in user_progress.values_list('element_id', flat=True) %}
+                <span> - Zaliczone</span>
+            {% else %}
+                <a href="{% url 'progression:update_progress' element.id %}">Zaktualizuj</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'progression:subject_list' subject.direction.id %}">Wróć do listy przedmiotów</a>
+{% endblock %}

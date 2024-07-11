@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Lista kierunków - Polibox
+{% endblock %}
+
+{% block content %}
+<h1>Lista kierunków</h1>
+<ul>
+    {% for direction in directions %}
+        <li><a href="{% url 'progression:subject_list' direction.id %}">{{ direction.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
