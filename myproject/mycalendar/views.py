@@ -1,64 +1,73 @@
-from django.views.generic import TemplateView, CreateView, DeleteView, UpdateView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import Event
+from .forms import EventForm  # Musisz utworzyć formularz EventForm
 from datetime import date, timedelta
 import calendar
 from .utils import get_month_calendar
-from .models import Event
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 
-class CalendarView(LoginRequiredMixin, TemplateView):
-    template_name = 'mycalendar/calendar.html'
-    login_url = '/users/login/'
+def is_admin(user):
+    return user.is_superuser
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        year = int(self.request.GET.get('year', date.today().year))
-        month = int(self.request.GET.get('month', date.today().month))
+@login_required(login_url='/users/login/')
+def calendar_view(request):
+    year = int(request.GET.get('year', date.today().year))
+    month = int(request.GET.get('month', date.today().month))
 
-        # Get the current calendar
-        context['calendar'] = get_month_calendar(year, month)
-        context['events'] = Event.objects.filter(date__year=year, date__month=month)
+    # Get the current calendar
+    context = {}
+    context['calendar'] = get_month_calendar(year, month)
+    context['events'] = Event.objects.filter(date__year=year, date__month=month)
 
-        # Calculate previous and next month
-        first_day_of_month = date(year, month, 1)
-        prev_month_last_day = first_day_of_month - timedelta(days=1)
-        next_month_first_day = first_day_of_month + timedelta(days=calendar.monthrange(year, month)[1])
+    # Calculate previous and next month
+    first_day_of_month = date(year, month, 1)
+    prev_month_last_day = first_day_of_month - timedelta(days=1)
+    next_month_first_day = first_day_of_month + timedelta(days=calendar.monthrange(year, month)[1])
 
-        context['prev_month'] = prev_month_last_day.month
-        context['prev_month_year'] = prev_month_last_day.year
-        context['next_month'] = next_month_first_day.month
-        context['next_month_year'] = next_month_first_day.year
+    context['prev_month'] = prev_month_last_day.month
+    context['prev_month_year'] = prev_month_last_day.year
+    context['next_month'] = next_month_first_day.month
+    context['next_month_year'] = next_month_first_day.year
 
-        # Add the name of the current month
-        context['current_month_name'] = first_day_of_month.strftime('%B %Y')
+    # Add the name of the current month
+    context['current_month_name'] = first_day_of_month.strftime('%B %Y')
 
-        return context
+    return render(request, 'mycalendar/calendar.html', context)
 
+@user_passes_test(is_admin, login_url='/users/login/')
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def event_create_view(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('mycalendar:calendar')
+    else:
+        date = request.GET.get('date')
+        form = EventForm(initial={'date': date})
 
-class EventCreateView(CreateView):
-    model = Event
-    template_name = 'mycalendar/event_form.html'
-    fields = ['title', 'description', 'date']
-    success_url = '/mycalendar/'
+    return render(request, 'mycalendar/event_form.html', {'form': form})
 
-    def get_initial(self):
-        initial = super().get_initial()
-        date = self.request.GET.get('date')
-        if date:
-            initial['date'] = date
-        return initial
+@user_passes_test(is_admin, login_url='/users/login/')
+def event_delete_view(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    event.delete()
+    return redirect('mycalendar:calendar')
 
-class EventDeleteView(DeleteView):
-    model = Event
-    template_name = 'mycalendar/event_confirm_delete.html'
-    success_url = reverse_lazy('mycalendar:calendar')
+@user_passes_test(is_admin, login_url='/users/login/')
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def event_update_view(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == 'POST':
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('mycalendar:calendar')
+    else:
+        form = EventForm(instance=event)
 
-class EventUpdateView(UpdateView):
-    model = Event
-    template_name = 'mycalendar/event_form.html'  # Szablon formularza edycji eventu
-    fields = ['title', 'description', 'date']  # Pola do edycji
-    success_url = reverse_lazy('mycalendar:calendar')  # Przekierowanie po zapisaniu zmian
-
-    def get_object(self, queryset=None):
-        event_id = self.kwargs['pk']
-        return Event.objects.get(pk=event_id)
+    return render(request, 'mycalendar/event_form.html', {'form': form})

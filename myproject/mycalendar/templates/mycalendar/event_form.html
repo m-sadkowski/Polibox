@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <h2>Edit Event</h2>
+  <h2>Edytuj wydarzenie</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Changes</button>
+    <button type="submit">Zapisz</button>
   </form>
 {% endblock %}
