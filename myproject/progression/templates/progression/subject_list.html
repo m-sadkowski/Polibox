@@ -1,20 +1,20 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %}   <!-- progression/templates/progression/subject_list.html -->
 
 {% block title %}
-    Lista przedmiotów - Polibox
+    Lista przedmiotów
 {% endblock %}
 
 {% block content %}
-<h1>Lista przedmiotów dla kierunku</h1>
-{% for semester, subjects in subjects_by_semester.items %}
+  <h1>Przedmioty na kierunku {{ direction_id }}</h1>
+  {% for semester, subjects in subjects_by_semester.items %}
     <h2>Semestr {{ semester }}</h2>
     <ul>
-        {% for subject in subjects %}
-            <li><a href="{% url 'progression:subject_detail' subject.id %}">{{ subject.name }}</a></li>
-        {% empty %}
-            <li>Brak przedmiotów w tym semestrze</li>
-        {% endfor %}
+      {% for subject_data in subjects %}
+        <li>
+          {{ subject_data.subject.name }} - {{ subject_data.completion_percentage }}%
+          <a href="{% url 'progression:subject_detail' subject_data.subject.id %}">Sprawdź szczegóły</a>
+        </li>
+      {% endfor %}
     </ul>
-{% endfor %}
-<a href="{% url 'progression:direction_list' %}">Wróć do listy kierunków</a>
+  {% endfor %}
 {% endblock %}

@@ -1,14 +1,17 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} <!-- progression/templates/progression/direction-list.html -->
 
 {% block title %}
-    Lista kierunków - Polibox
+    Lista kierunków
 {% endblock %}
 
 {% block content %}
-<h1>Lista kierunków</h1>
-<ul>
-    {% for direction in directions %}
-        <li><a href="{% url 'progression:subject_list' direction.id %}">{{ direction.name }}</a></li>
+  <h1>Kierunki</h1>
+  <ul>
+    {% for data in direction_data %}
+      <li>
+        {{ data.direction.name }} - {{ data.completion_percentage }}%
+        <a href="{% url 'progression:subject_list' data.direction.id %}">Zobacz przedmiot</a>
+      </li>
     {% endfor %}
-</ul>
+  </ul>
 {% endblock %}

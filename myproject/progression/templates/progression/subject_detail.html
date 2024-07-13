@@ -1,23 +1,28 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} <!-- progression/templates/progression/subject_detail.html -->
 
 {% block title %}
-    {{ subject.name }} - Polibox
+    Szczegóły przedmiotu
 {% endblock %}
 
 {% block content %}
-<h1>{{ subject.name }}</h1>
-<h2>Semestr: {{ subject.semester }}</h2>
-<ul>
-    {% for element in elements %}
+  <h1>{{ subject.name }}</h1>
+  <h2>Progres: {{ subject_completion_percentage }}%</h2>
+  <form method="post" action="{% url 'progression:update_progress' subject.id %}">
+    {% csrf_token %}
+    <ul>
+      {% for data in progress_data %}
         <li>
-            {{ element.name }}
-            {% if element.id in user_progress.values_list('element_id', flat=True) %}
-                <span> - Zaliczone</span>
-            {% else %}
-                <a href="{% url 'progression:update_progress' element.id %}">Zaktualizuj</a>
-            {% endif %}
+          {{ data.element.name }}: {{ data.progress_percentage }}%
+          <div>
+            <label for="completed_fragments_{{ data.element.id }}">Zaliczone fragmenty: </label>
+            <input type="number" id="completed_fragments_{{ data.element.id }}" name="completed_fragments_{{ data.element.id }}" value="{% if data.progress %}{{ data.progress.completed_fragments }}{% else %}0{% endif %}">
+            /
+            <label for="total_fragments_{{ data.element.id }}">Ilość fragmentów: </label>
+            <input type="number" id="total_fragments_{{ data.element.id }}" name="total_fragments_{{ data.element.id }}" value="{% if data.progress %}{{ data.progress.total_fragments }}{% else %}1{% endif %}">
+          </div>
         </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'progression:subject_list' subject.direction.id %}">Wróć do listy przedmiotów</a>
+      {% endfor %}
+    </ul>
+    <button type="submit">Zaktualizuj</button>
+  </form>
 {% endblock %}

@@ -1,15 +1,27 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} <!-- progression/templates/progression/update_progress.html -->
 
 {% block title %}
-    Zaktualizuj postęp - Polibox
+    Zaktualizuj przedmiot
 {% endblock %}
 
 {% block content %}
-<h1>Zaktualizuj postęp dla: {{ element.name }}</h1>
-<form method="post">
+  <h1>Update Progress for {{ subject.name }}</h1>
+  <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Zapisz</button>
-</form>
-<a href="{% url 'progression:subject_detail' element.subject.id %}">Wróć do przedmiotu</a>
+    <ul>
+      {% for element in elements %}
+        <li>
+          {{ element.name }}
+          <div>
+            <label for="completed_fragments_{{ element.id }}">Completed Fragments</label>
+            <input type="number" id="completed_fragments_{{ element.id }}" name="completed_fragments_{{ element.id }}" value="{% if user_progress[element.id] %}{{ user_progress[element.id].completed_fragments }}{% else %}0{% endif %}">
+            /
+            <label for="total_fragments_{{ element.id }}">Total Fragments</label>
+            <input type="number" id="total_fragments_{{ element.id }}" name="total_fragments_{{ element.id }}" value="{% if user_progress[element.id] %}{{ user_progress[element.id].total_fragments }}{% else %}1{% endif %}">
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <button type="submit">Update</button>
+  </form>
 {% endblock %}
