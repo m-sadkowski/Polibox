@@ -1,20 +1,24 @@
-{% extends 'layout.html' %}   <!-- progression/templates/progression/subject_list.html -->
+{% extends 'layout.html' %}
 
 {% block title %}
     Lista przedmiotów
 {% endblock %}
 
 {% block content %}
-  <h1>Przedmioty na kierunku {{ direction_id }}</h1>
-  {% for semester, subjects in subjects_by_semester.items %}
-    <h2>Semestr {{ semester }}</h2>
-    <ul>
-      {% for subject_data in subjects %}
-        <li>
-          {{ subject_data.subject.name }} - {{ subject_data.completion_percentage }}%
-          <a href="{% url 'progression:subject_detail' subject_data.subject.id %}">Sprawdź szczegóły</a>
-        </li>
+  <div class="info-box">
+    <div class="info-content">
+      <h1>Przedmioty na kierunku {{ direction.name }}</h1>
+      {% for semester, data in subjects_by_semester.items %}
+        <h2>Semestr {{ semester }} - {{ data.completion_percentage }}%</h2>
+        <ul>
+          {% for subject_data in data.subjects %}
+            <li>
+              {{ subject_data.subject.name }} - {{ subject_data.completion_percentage }}%
+              <a href="{% url 'progression:subject_detail' direction_slug=direction.slug subject_slug=subject_data.subject.slug %}">Sprawdź szczegóły</a>
+            </li>
+          {% endfor %}
+        </ul>
       {% endfor %}
-    </ul>
-  {% endfor %}
+    </div>
+  </div>
 {% endblock %}

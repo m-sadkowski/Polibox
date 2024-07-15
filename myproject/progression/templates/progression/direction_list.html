@@ -1,17 +1,21 @@
-{% extends 'layout.html' %} <!-- progression/templates/progression/direction-list.html -->
+{% extends 'layout.html' %}
 
 {% block title %}
     Lista kierunków
 {% endblock %}
 
 {% block content %}
-  <h1>Kierunki</h1>
-  <ul>
-    {% for data in direction_data %}
-      <li>
-        {{ data.direction.name }} - {{ data.completion_percentage }}%
-        <a href="{% url 'progression:subject_list' data.direction.id %}">Zobacz przedmiot</a>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="info-box">
+    <div class="info-content">
+      <h1>Kierunki</h1>
+      <ul>
+        {% for data in direction_data %}
+          <li>
+            {{ data.direction.name }}
+            <a href="{% url 'progression:subject_list' direction_slug=data.direction.slug %}">Zobacz przedmioty</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 {% endblock %}
