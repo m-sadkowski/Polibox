@@ -6,7 +6,7 @@
 
 {% block content %}
   <div class="info-box">
-    <div class="info-content">
+    <div class="info-subjects">
       <h1>Przedmioty na kierunku {{ direction.name }}</h1>
       {% for semester, data in subjects_by_semester.items %}
         <h2>Semestr {{ semester }} - {{ data.completion_percentage }}%</h2>
