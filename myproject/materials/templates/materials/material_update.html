@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    New Material
+    Update Material
 {% endblock %}
 
 {% block content %}
@@ -9,9 +9,8 @@
         <div class="materials-form-box">
             <div class="materials-form-container">
                 <form class="materials-form" method="post" enctype="multipart/form-data">
-                    <h1 style="text-align: center;">DODAJ MATERIAŁY</h1>
+                    <h1 style="text-align: center;">DODAJ MATERIAŁY DO {{ material.title }}</h1>
                     {% csrf_token %}
-                    {{ form.as_p }}
                     <label for="lectures_files">Pliki wykładowe:</label>
                     <input type="file" name="lectures_files" multiple>
                     <label for="classes_files">Pliki ćwiczeniowe:</label>

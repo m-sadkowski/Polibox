@@ -1,17 +1,71 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    {{ post.title }}
+    {{ material.title }}
 {% endblock %}
 
 {% block content %}
     <section>
         <h1>{{ material.title }}</h1>
         <p>{{ material.lectures }}</p>
+        <ul>
+            {% for file in files %}
+                {% if file.category == 'lectures' %}
+                    <li>
+                        <a href="{{ file.file.url }}" download>{{ file.file.name }}</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'materials:delete-file' file.id %}" class="delete-button">Usuń</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
         <p>{{ material.classes }}</p>
+        <ul>
+            {% for file in files %}
+                {% if file.category == 'classes' %}
+                    <li>
+                        <a href="{{ file.file.url }}" download>{{ file.file.name }}</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'materials:delete-file' file.id %}" class="delete-button">Usuń</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
         <p>{{ material.labs }}</p>
+        <ul>
+            {% for file in files %}
+                {% if file.category == 'labs' %}
+                    <li>
+                        <a href="{{ file.file.url }}" download>{{ file.file.name }}</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'materials:delete-file' file.id %}" class="delete-button">Usuń</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
         <p>{{ material.projects }}</p>
+        <ul>
+            {% for file in files %}
+                {% if file.category == 'projects' %}
+                    <li>
+                        <a href="{{ file.file.url }}" download>{{ file.file.name }}</a>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'materials:delete-file' file.id %}" class="delete-button">Usuń</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
         <p>{{ material.date }}</p>
+        {% if user.is_superuser %}
+            <a href="{% url 'materials:update-material' material.slug %}">Dodaj Materiały</a>
+            <form action="{% url 'materials:delete-material' material.slug %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Usuń Przedmiot</button>
+            </form>
+        {% endif %}
     </section>
 {% endblock %}
-
