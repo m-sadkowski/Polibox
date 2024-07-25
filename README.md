@@ -1,6 +1,8 @@
+---
+
 # POLIBOX
 
-POLIBOX is a comprehensive platform designed to assist students of Universities of Technology. This project, built using Django, provides various resources and tools to facilitate the academic journey of students. Backend is almost ready, need more security and some small improvements. Frontend should be redesigned but I am not really into it.
+POLIBOX is a comprehensive platform designed to assist students of Universities of Technology. This project, built using Django, provides various resources and tools to facilitate the academic journey of students. The backend is almost ready, needing more security and some small improvements. The frontend should be redesigned, but I am not really into it.
 
 ## Table of Contents
 
@@ -25,32 +27,27 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/polibox.git
-    cd polibox
+    git clone https://github.com/m-sadkowski/Polibox.git
+    cd Polibox
+    cd myproject
     ```
 
-2. **Create and activate a virtual environment**:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
-
-3. **Install the dependencies**:
+2. **Install the dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
 
-4. **Apply the migrations**:
+3. **Apply the migrations**:
     ```bash
     python manage.py migrate
     ```
 
-5. **Create a superuser**:
+4. **Create a superuser**:
     ```bash
     python manage.py createsuperuser
     ```
 
-6. **Run the development server**:
+5. **Run the development server**:
     ```bash
     python manage.py runserver
     ```
@@ -64,6 +61,7 @@ Once the server is running, you can access the application at `http://127.0.0.1:
 - **Calendar**: Check the `Calendar` for important academic dates.
 - **Progress Tracker**: View your progress in the `Progress` section.
 - **Information**: Visit the `Information` page for contact details and regulations.
+- **Admin**: Login as administrator via http://127.0.0.1:8000/admin/ to add events to calendar or manage materials.
 
 ## Contributing
 
@@ -100,3 +98,5 @@ For any queries, suggestions, or feedback, please contact:
 ---
 
 Thank you for using POLIBOX! We hope it makes your academic journey easier and more efficient.
+
+---
