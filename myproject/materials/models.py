@@ -49,11 +49,21 @@ class File(models.Model):
     def get_thumbnail_url(self):
         extension = os.path.splitext(self.file.name)[1].lower()
         if extension in ['.jpg', '.jpeg', '.png', '.gif']:
-            return self.file.url  # Dla obrazów zwracamy URL pliku
+            return self.file.url
         elif extension == '.pdf':
-            return '/static/icons/pdf-icon.png'  # Ścieżka do ikony PDF
+            return '/media/icons/pdf-ico.png'
+        elif extension in ['.doc', '.docx']:
+            return '/media/icons/doc-ico.png'
+        elif extension == '.txt':
+            return '/media/icons/doc-ico.png'
+        elif extension in ['.c', '.cpp', '.h', '.hpp', '.py', '.java', '.js', '.html', '.css', '.php', '.sql', '.sh', '.bat', '.ps1', '.psm1']:
+            return '/media/icons/code-ico.png'
+        elif extension in ['.mp3', '.wav', '.flac', '.ogg', '.wma', '.aac']:
+            return '/media/icons/audio-ico.png'
+        elif extension in ['.mp4', '.avi', '.mkv', '.mov', '.wmv', '.flv', '.3gp', '.webm', '.mpg', '.mpeg', '.m4v']:
+            return '/media/icons/video-ico.png'
         else:
-            return '/static/icons/default-icon.png'  # Ścieżka do domyślnej ikony
+            return '/media/icons/default-icon.png'
 
     def get_filename(self):
         return os.path.basename(self.file.name)

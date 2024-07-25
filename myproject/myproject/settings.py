@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = xxx
+SECRET_KEY = 'django-insecure-5#36ko3cj8#f@!&m75-)pohgm&i7)=81x8+n-v)6@tj0=31-dr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -134,3 +134,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+# Session time in seconds
+SESSION_COOKIE_AGE = 600
+
+# Avoid saving session data to the database
+SESSION_SAVE_EVERY_REQUEST = False
+
+# Use signed cookies to store session data
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+# Session expires when the user closes the browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -125,3 +125,53 @@ search.addEventListener("keyup", () => { // Listen for keyup event
         });
     }
 });
+
+function downloadSelected() {
+    const checkboxes = document.querySelectorAll('.file-checkbox:checked');
+    const zip = new JSZip();
+
+    // Adding files to ZIP
+    const filePromises = Array.from(checkboxes).map(checkbox => {
+        const fileUrl = checkbox.value;
+        const fileName = checkbox.dataset.filename;
+
+        return fetch(fileUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                zip.file(fileName, blob);
+            });
+    });
+
+    // Creating and downloading ZIP file
+    Promise.all(filePromises).then(() => {
+        zip.generateAsync({ type: 'blob' })
+            .then(content => {
+                saveAs(content, 'selected_files.zip');
+            });
+    });
+}
+
+function downloadAll() {
+    const checkboxes = document.querySelectorAll('.file-checkbox');
+    const zip = new JSZip();
+
+    // Adding files to ZIP
+    const filePromises = Array.from(checkboxes).map(checkbox => {
+    const fileUrl = checkbox.value;
+    const fileName = checkbox.dataset.filename;
+
+        return fetch(fileUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                zip.file(fileName, blob);
+            });
+    });
+
+    // Creating and downloading ZIP file
+    Promise.all(filePromises).then(() => {
+        zip.generateAsync({ type: 'blob' })
+            .then(content => {
+                saveAs(content, 'all_files.zip');
+            });
+    });
+}
