@@ -21,6 +21,8 @@ POLIBOX is a comprehensive platform designed to assist students of Universities 
 - **Progress Tracker**: Monitor your academic progress.
 - **Information**: Access contact information and the portal's regulations.
 
+Check Wiki section to see what does it look like!
+
 ## Installation
 
 To run this project locally, follow these steps:
