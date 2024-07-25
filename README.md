@@ -1,6 +1,6 @@
 # POLIBOX
 
-POLIBOX is a comprehensive platform designed to assist students of Gdańsk University of Technology (PG). This project, built using Django, provides various resources and tools to facilitate the academic journey of students.
+POLIBOX is a comprehensive platform designed to assist students of Universities of Technology. This project, built using Django, provides various resources and tools to facilitate the academic journey of students.
 
 ## Table of Contents
 
