@@ -52,18 +52,42 @@ class File(models.Model):
             return self.file.url
         elif extension == '.pdf':
             return '/media/icons/pdf-ico.png'
-        elif extension in ['.doc', '.docx']:
+        elif extension in ['.doc', '.docx', '.odt', '.rtf']:
             return '/media/icons/doc-ico.png'
         elif extension == '.txt':
             return '/media/icons/doc-ico.png'
-        elif extension in ['.c', '.cpp', '.h', '.hpp', '.py', '.java', '.js', '.html', '.css', '.php', '.sql', '.sh', '.bat', '.ps1', '.psm1']:
+        elif extension in ['.bat', '.ps1', '.psm1']:
             return '/media/icons/code-ico.png'
+        elif extension == '.c':
+            return '/media/icons/c-ico.png'
+        elif extension == '.cpp':
+            return '/media/icons/cpp-ico.png'
+        elif extension == '.h' or extension == '.hpp':
+            return '/media/icons/h-ico.png'
+        elif extension == '.py':
+            return '/media/icons/py-ico.png'
+        elif extension == '.java':
+            return '/media/icons/java-ico.png'
+        elif extension == '.js':
+            return '/media/icons/js-ico.png'
+        elif extension == '.sh':
+            return '/media/icons/sh-ico.png'
+        elif extension == '.html':
+            return '/media/icons/html-ico.png'
+        elif extension == '.css':
+            return '/media/icons/css-ico.png'
+        elif extension == '.php':
+            return '/media/icons/php-ico.png'
+        elif extension == '.    sql':
+            return '/media/icons/sql-ico.png'
         elif extension in ['.mp3', '.wav', '.flac', '.ogg', '.wma', '.aac']:
             return '/media/icons/audio-ico.png'
         elif extension in ['.mp4', '.avi', '.mkv', '.mov', '.wmv', '.flv', '.3gp', '.webm', '.mpg', '.mpeg', '.m4v']:
             return '/media/icons/video-ico.png'
+        elif extension in ['.zip', '.rar']:
+            return '/media/icons/zip-ico.png'
         else:
-            return '/media/icons/default-icon.png'
+            return '/media/icons/other-ico.png'
 
     def get_filename(self):
         return os.path.basename(self.file.name)
