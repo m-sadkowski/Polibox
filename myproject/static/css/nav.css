@@ -46,20 +46,14 @@ nav a:hover {
     gap: 1rem;
 }
 
-@media (max-width: 768px) {
-    .navbar-toggle {
-        display: block;
-        margin-left: auto;
-    }
+.nav-logout-button {
+    font-size: 2rem;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
 
-    .navbar-links {
-        display: none;
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-    }
-
-    .navbar-links.active {
-        display: flex;
-    }
+.nav-logout-button:hover {
+    opacity: 0.60;
 }

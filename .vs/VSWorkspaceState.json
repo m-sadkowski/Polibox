@@ -2,12 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\myproject",
-    "\\myproject\\static",
     "\\myproject\\static\\css",
-    "\\myproject\\users",
     "\\myproject\\users\\templates",
     "\\myproject\\users\\templates\\users"
   ],
-  "SelectedNode": "\\favicon.ico",
+  "SelectedNode": "\\myproject\\static",
   "PreviewInSolutionExplorer": false
 }
